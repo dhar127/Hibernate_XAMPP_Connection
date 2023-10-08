@@ -1,0 +1,93 @@
+# Hibernate_SQL_XAMPP_Connection
+Prerequisites:
+- Eclipse IDE installed.
+- XAMPP with MySQL installed.
+
+Step 1: Open Eclipse IDE
+1. Launch Eclipse IDE on your computer.
+
+Step 2: Install JBoss Hibernate Tools
+1. Go to "Help" in the Eclipse menu.
+2. Select "Eclipse Marketplace."
+3. Search for "Hibernate Tools" and install it.
+
+Step 3: Create a Maven Project
+1. File > New > Other.
+2. Search for "Maven" and select "Maven Project."
+3. Click "Next."
+4. Choose "Create a simple project (skip archetype selection)" and click "Next."
+5. Enter Group ID and Artifact ID (e.g., "com.example" for Group ID and "hibernate-project" for Artifact ID).
+6. Click "Finish."
+
+Step 4: Update `pom.xml`
+1. Open `pom.xml` from your project.
+2. Add Hibernate dependencies and MySQL Connector/J. Your dependencies should look like this:
+<dependencies>
+    <!-- Hibernate -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>6.2.7.Final</version>
+    </dependency>
+    
+    <!-- MySQL Connector/J -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.27</version>
+    </dependency>
+</dependencies>
+1. Save the `pom.xml` file.
+
+Step 5: Create a User Entity Class
+1. In the `src/main/java` directory, create a package (e.g., `com.example.model`).
+2. Inside the package, create a Java class named `User.java`.
+3. Define the `User` class with `@Entity`, `@Id`, and `@Column` annotations for the `ID` and `name` fields. It should look like this:
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Column;
+
+@Entity
+public class User {
+    @Id
+    @Column(name = "ID")
+    private int id;
+    
+    @Column(name = "name")
+    private String name;
+    
+    // Getters and setters for id and name
+}
+Step 6: Configure Hibernate
+1. Right-click on your project > New > Other.
+2. Search for "Hibernate Configuration XML File" and click "Next."
+3. Choose "Use existing JDBC connection" and select your MySQL database connection.
+4. Save the configuration file (e.g., `hibernate.cfg.xml`).
+
+Step 7: Update `hibernate.cfg.xml
+1. Open the `hibernate.cfg.xml` file.
+2. Configure the following properties for your MySQL database connection:
+
+<property name="hibernate.connection.username">root</property>
+<property name="hibernate.connection.password">your_password</property>
+<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate002</property>
+
+Step 8: Write Application Code
+1. Create a Java class (e.g., `App.java`) in your project.
+2. Configure Hibernate and create a session.
+3. Create and save a `User` object.
+4. Begin a transaction, save the user, commit the transaction, and close the session.
+
+Step 9: Start XAMPP and Create a Database
+1. Start XAMPP.
+2. Access the MySQL Admin panel.
+3. Create a new database (e.g., `hibernate002`).
+4. Create a table named `user` with columns `ID` and `name`.
+
+Step 10: Run the Application
+1. Right-click on your Java application (`App.java`).
+2. Select "Run As" > "Java Application."
+3. Check the console for messages indicating the successful saving of data.
+
+      
+                              
